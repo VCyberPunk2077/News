@@ -1,11 +1,13 @@
-package com.vcyberpunk.news
+package com.vcyberpunk.news.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.vcyberpunk.news.ui.theme.NewsTheme
+import com.vcyberpunk.news.presentation.ui.theme.NewsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
