@@ -1,4 +1,4 @@
-package com.vcyberpunk.news.ui.theme
+package com.vcyberpunk.news.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
