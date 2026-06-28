@@ -3,6 +3,7 @@ package com.vcyberpunk.news.data.local.entity
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
+import androidx.room.Index
 
 @Entity(
     tableName = "articles",
@@ -17,7 +18,8 @@ import androidx.room.ForeignKey.Companion.CASCADE
             childColumns = ["topic"],
             onDelete = CASCADE
         )
-    ]
+    ],
+    indices = [Index("topic")]
 )
 data class ArticleDbModel(
     val title: String,
