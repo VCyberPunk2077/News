@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -19,6 +21,24 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val apiKey = providers.gradleProperty("NEWS_API_KEY")
+            .orElse(providers.provider {
+                val localProperties = Properties()
+                val localPropertiesFile = rootProject.file("local.properties")
+                if (localPropertiesFile.exists()) {
+                    localPropertiesFile.inputStream().use {
+                        localProperties.load(it)
+                    }
+                }
+                localProperties.getProperty("NEWS_API_KEY") ?: error("You're should add apikey into local.properties")
+            })
+
+        buildConfigField(
+            "String",
+            "NEWS_API_KEY",
+            apiKey.get()
+        )
     }
 
     buildTypes {
@@ -36,10 +56,13 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
 dependencies {
+    implementation(libs.retrofit)
+    implementation(libs.converter.kotlinx.serialization)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
