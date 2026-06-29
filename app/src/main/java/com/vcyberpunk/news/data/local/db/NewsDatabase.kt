@@ -8,7 +8,7 @@ import com.vcyberpunk.news.data.local.entity.SubscriptionDbModel
 
 @Database(
     entities = [ArticleDbModel::class, SubscriptionDbModel::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class NewsDatabase: RoomDatabase() {

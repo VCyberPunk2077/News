@@ -6,6 +6,9 @@ import com.vcyberpunk.news.data.local.db.NewsDao
 import com.vcyberpunk.news.data.local.db.NewsDatabase
 import com.vcyberpunk.news.data.remote.api.NewsApiKeyInterceptor
 import com.vcyberpunk.news.data.remote.api.NewsApiService
+import com.vcyberpunk.news.data.repository.NewsRepositoryImpl
+import com.vcyberpunk.news.domain.repository.NewsRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +27,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 interface DataModule {
+
+    @Binds
+    @Singleton
+    fun bindNewsRepository(impl: NewsRepositoryImpl): NewsRepository
 
     companion object {
 
@@ -77,7 +84,7 @@ interface DataModule {
             context = context,
             klass = NewsDatabase::class.java,
             name = DB_NAME
-        ).build()
+        ).fallbackToDestructiveMigration(true).build()
 
         @Singleton
         @Provides
