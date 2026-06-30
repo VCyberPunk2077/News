@@ -24,6 +24,6 @@ class NewsApiKeyInterceptor @Inject constructor(): Interceptor {
     }
 
     private companion object {
-        const val KEY_PARAM = "key"
+        const val KEY_PARAM = "apiKey"
     }
 }
