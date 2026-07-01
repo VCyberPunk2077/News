@@ -1,6 +1,10 @@
 package com.vcyberpunk.news.data.repository
 
 import android.util.Log
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.vcyberpunk.news.data.background.RefreshDataWorker
 import com.vcyberpunk.news.data.local.db.NewsDao
 import com.vcyberpunk.news.data.local.entity.ArticleDbModel
 import com.vcyberpunk.news.data.local.entity.SubscriptionDbModel
@@ -15,11 +19,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val newsApiService: NewsApiService,
-    private val newsDao: NewsDao
+    private val newsDao: NewsDao,
+    private val workManager: WorkManager
 ) : NewsRepository {
     override fun gelAllSubscriptions(): Flow<List<String>> =
         newsDao.getAllSubscriptions().map { subscriptionDbModels ->
@@ -64,9 +70,27 @@ class NewsRepositoryImpl @Inject constructor(
         }
     }
 
+    private fun startBackgroundRefresh() {
+        val request = PeriodicWorkRequestBuilder<RefreshDataWorker>(
+            repeatInterval = 15L,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES
+        ).build()
+        workManager.enqueueUniquePeriodicWork(
+            uniqueWorkName = WORK_NAME,
+            existingPeriodicWorkPolicy = ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+            request = request
+        )
+    }
+
     override fun getArticlesByTopics(topics: List<String>): Flow<List<Article>> =
         newsDao.getAllArticlesByTopics(topics).map { it.toEntities() }
 
     override suspend fun clearAllArticles(topics: List<String>) =
         newsDao.deleteArticlesByTopic(topics)
+
+    private companion object {
+
+        const val WORK_NAME = "Refresh data"
+
+    }
 }
