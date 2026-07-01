@@ -8,6 +8,7 @@ import com.vcyberpunk.news.data.local.db.NewsDatabase
 import com.vcyberpunk.news.data.remote.api.NewsApiKeyInterceptor
 import com.vcyberpunk.news.data.remote.api.NewsApiService
 import com.vcyberpunk.news.data.repository.NewsRepositoryImpl
+import com.vcyberpunk.news.data.repository.SettingsRepositoryImpl
 import com.vcyberpunk.news.domain.repository.NewsRepository
 import dagger.Binds
 import dagger.Module
@@ -32,6 +33,10 @@ interface DataModule {
     @Binds
     @Singleton
     fun bindNewsRepository(impl: NewsRepositoryImpl): NewsRepository
+
+    @Binds
+    @Singleton
+    fun bindSettingsRepository(impl: SettingsRepositoryImpl): SettingsRepositoryImpl
 
     companion object {
 
