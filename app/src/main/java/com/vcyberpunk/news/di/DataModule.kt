@@ -2,6 +2,7 @@ package com.vcyberpunk.news.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.work.WorkManager
 import com.vcyberpunk.news.data.local.db.NewsDao
 import com.vcyberpunk.news.data.local.db.NewsDatabase
 import com.vcyberpunk.news.data.remote.api.NewsApiKeyInterceptor
@@ -37,6 +38,12 @@ interface DataModule {
         private const val DB_NAME = "NewsDatabase"
 
         private const val BASE_URL = "https://newsapi.org/"
+
+        @Singleton
+        @Provides
+        fun provideWorkManager(
+            @ApplicationContext context: Context
+        ): WorkManager = WorkManager.getInstance(context)
 
         @Singleton
         @Provides
