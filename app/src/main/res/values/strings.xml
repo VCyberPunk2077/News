@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">News</string>
+    <string name="app_name" translatable="false">News</string>
     <string name="subscriptions_title">My News</string>
     <string name="update_articles">Update articles</string>
     <string name="settings_screen">Settings screen</string>
@@ -21,10 +21,10 @@
     <string name="back">Back</string>
     <string name="search_language">Search language</string>
     <string name="select_language_for_news_search">Select language for news search</string>
-    <string name="english">English</string>
-    <string name="russian">Русский</string>
-    <string name="french">Français</string>
-    <string name="german">Deutsch</string>
+    <string name="english" translatable="false">English</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="french" translatable="false">Français</string>
+    <string name="german" translatable="false">Deutsch</string>
     <string name="_15_minutes">15 minutes</string>
     <string name="_30_minutes">30 minutes</string>
     <string name="_1_hour">1 hour</string>
@@ -38,4 +38,5 @@
     <string name="show_notifications_about_articles">Show notifications about articles</string>
     <string name="update_only_via_wi_fi">Update only via Wi-Fi</string>
     <string name="save_mobile_data">Save mobile data</string>
+    <string name="articles">Articles %1$d</string>
 </resources>
