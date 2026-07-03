@@ -12,8 +12,10 @@ import com.vcyberpunk.news.data.local.entity.ArticleDbModel
 import com.vcyberpunk.news.data.local.entity.SubscriptionDbModel
 import com.vcyberpunk.news.data.mapper.toDbModels
 import com.vcyberpunk.news.data.mapper.toEntities
+import com.vcyberpunk.news.data.mapper.toQueryParam
 import com.vcyberpunk.news.data.remote.api.NewsApiService
 import com.vcyberpunk.news.domain.entity.Article
+import com.vcyberpunk.news.domain.entity.Language
 import com.vcyberpunk.news.domain.entity.RefreshConfig
 import com.vcyberpunk.news.domain.repository.NewsRepository
 import kotlinx.coroutines.CancellationException
@@ -40,15 +42,15 @@ class NewsRepositoryImpl @Inject constructor(
         newsDao.addSubscription(subscriptionDbModel)
     }
 
-    override suspend fun updateArticlesForTopic(topic: String): Boolean {
-        val articles = loadArticles(topic)
+    override suspend fun updateArticlesForTopic(topic: String, language: Language): Boolean {
+        val articles = loadArticles(topic, language)
         val ids = newsDao.addArticles(articles)
         return ids.any { it != -1L }
     }
 
-    private suspend fun loadArticles(topic: String): List<ArticleDbModel> {
+    private suspend fun loadArticles(topic: String, language: Language): List<ArticleDbModel> {
         return try {
-            newsApiService.loadArticles(topic).toDbModels(topic)
+            newsApiService.loadArticles(topic, language.toQueryParam()).toDbModels(topic)
         } catch (e: Exception) {
             if (e is CancellationException) {
                 throw e
@@ -63,13 +65,13 @@ class NewsRepositoryImpl @Inject constructor(
         newsDao.deleteSubscription(subscriptionDbModel)
     }
 
-    override suspend fun updateArticlesForAllSubscriptions(): List<String> {
+    override suspend fun updateArticlesForAllSubscriptions(language: Language): List<String> {
         val updatedTopics = mutableListOf<String>()
         val subscriptions = newsDao.getAllSubscriptions().first()
         coroutineScope {
             subscriptions.forEach {
                 launch {
-                    val updated = updateArticlesForTopic(it.topic)
+                    val updated = updateArticlesForTopic(it.topic, language)
                     if (updated) {
                         updatedTopics.add(it.topic)
                     }
