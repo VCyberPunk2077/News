@@ -32,7 +32,7 @@ class NewsRepositoryImpl @Inject constructor(
     private val newsDao: NewsDao,
     private val workManager: WorkManager
 ) : NewsRepository {
-    override fun gelAllSubscriptions(): Flow<List<String>> =
+    override fun getAllSubscriptions(): Flow<List<String>> =
         newsDao.getAllSubscriptions().map { subscriptionDbModels ->
             subscriptionDbModels.map { it.topic }
         }

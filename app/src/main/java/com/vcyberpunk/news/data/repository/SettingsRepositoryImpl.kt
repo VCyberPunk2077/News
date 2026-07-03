@@ -65,7 +65,7 @@ class SettingsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateNotificationsEnables(enabled: Boolean) {
+    override suspend fun updateNotificationsEnabled(enabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[notificationsEnabledKey] = enabled
         }

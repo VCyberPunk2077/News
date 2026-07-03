@@ -8,6 +8,13 @@ data class Settings(
 ) {
 
     companion object {
+
+        fun Settings.toRefreshConfig(): RefreshConfig = RefreshConfig(
+            language = language,
+            interval = interval,
+            wifiOnly = wifiOnly
+        )
+
         val DEFAULT_LANGUAGE = Language.ENGLISH
         val DEFAULT_INTERVAL = Interval.MIN_15
         const val DEFAULT_NOTIFICATIONS_ENABLED = false

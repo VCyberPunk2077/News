@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">News</string>
+    <string name="subscriptions_title">Мои новости</string>
+    <string name="update_articles">Обновить статьи</string>
+    <string name="settings_screen">Экран настроек</string>
+    <string name="clear_articles">Очистить статьи</string>
+    <string name="remove_subscription">Удалить подписку</string>
+    <string name="what_interests_you">Что вас интересует?</string>
+    <string name="add_subscription">Добавить подписку</string>
+    <string name="subscriptions">Подписки (%1$d)</string>
+    <string name="no_subscriptions">Нет подписок</string>
+    <string name="read_article">Открыть статью</string>
+    <string name="read">Читать</string>
+    <string name="share_article">Поделиться статьёй</string>
+    <string name="share">Поделиться</string>
+    <string name="no_articles_for_selected_subscriptions">Нет статей по выбранным подпискам</string>
+    <string name="new_articles">Новые статьи</string>
+    <string name="new_articles_notification_title">Новые статьи</string>
+    <string name="update_subscriptions">Обновить %1$d подписок: %2$s</string>
+    <string name="settings">Настройки</string>
+    <string name="back">Назад</string>
+    <string name="search_language">Язык поиска</string>
+    <string name="select_language_for_news_search">Выберите язык для поиска новостей</string>
+    <string name="english" translatable="false">English</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="french" translatable="false">Français</string>
+    <string name="german" translatable="false">Deutsch</string>
+    <string name="_15_minutes">15 минут</string>
+    <string name="_30_minutes">30 минут</string>
+    <string name="_1_hour">1 час</string>
+    <string name="_2_hours">2 часа</string>
+    <string name="_4_hours">4 часа</string>
+    <string name="_8_hours">8 часов</string>
+    <string name="_24_hours">24 часа</string>
+    <string name="update_interval">Интервал обновления</string>
+    <string name="how_often_to_update_news">Как часто обновлять новости</string>
+    <string name="notifications">Уведомления</string>
+    <string name="show_notifications_about_articles">Показывать уведомления о загруженных статьях</string>
+    <string name="update_only_via_wi_fi">Обновлять только через Wi-Fi</string>
+    <string name="save_mobile_data">Экономить мобильный трафик</string>
+    <string name="articles">Статьи %1$d</string>
+</resources>

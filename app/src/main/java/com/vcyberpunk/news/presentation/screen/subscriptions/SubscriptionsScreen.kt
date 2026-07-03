@@ -101,7 +101,7 @@ fun SubscriptionsScreen(
                 }
                 item {
                     Text(
-                        text = "Articles ${state.articles.size}",
+                        text = stringResource(R.string.articles, state.articles.size),
                         fontWeight = FontWeight.Bold
                     )
                 }
