@@ -40,9 +40,10 @@ class NewsRepositoryImpl @Inject constructor(
         newsDao.addSubscription(subscriptionDbModel)
     }
 
-    override suspend fun updateArticlesForTopic(topic: String) {
+    override suspend fun updateArticlesForTopic(topic: String): Boolean {
         val articles = loadArticles(topic)
-        newsDao.addArticles(articles)
+        val ids = newsDao.addArticles(articles)
+        return ids.any { it != -1L }
     }
 
     private suspend fun loadArticles(topic: String): List<ArticleDbModel> {
@@ -62,15 +63,20 @@ class NewsRepositoryImpl @Inject constructor(
         newsDao.deleteSubscription(subscriptionDbModel)
     }
 
-    override suspend fun updateArticlesForAllSubscriptions() {
+    override suspend fun updateArticlesForAllSubscriptions(): List<String> {
+        val updatedTopics = mutableListOf<String>()
         val subscriptions = newsDao.getAllSubscriptions().first()
         coroutineScope {
             subscriptions.forEach {
                 launch {
-                    updateArticlesForTopic(it.topic)
+                    val updated = updateArticlesForTopic(it.topic)
+                    if (updated) {
+                        updatedTopics.add(it.topic)
+                    }
                 }
             }
         }
+        return updatedTopics
     }
 
     override fun startBackgroundRefresh(refreshConfig: RefreshConfig) {
