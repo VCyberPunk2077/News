@@ -1,6 +1,6 @@
 package com.vcyberpunk.news.domain.usecase
 
-import com.vcyberpunk.news.data.mapper.toRefreshConfig
+import com.vcyberpunk.news.domain.entity.Settings.Companion.toRefreshConfig
 import com.vcyberpunk.news.domain.repository.NewsRepository
 import com.vcyberpunk.news.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.collect

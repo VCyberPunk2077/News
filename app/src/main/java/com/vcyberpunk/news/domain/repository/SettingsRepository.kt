@@ -12,7 +12,7 @@ interface SettingsRepository {
 
     suspend fun updateInterval(minutes: Int)
 
-    suspend fun updateNotificationsEnables(enabled: Boolean)
+    suspend fun updateNotificationsEnabled(enabled: Boolean)
 
     suspend fun updateWifiOnlyEnables(wifiOnly: Boolean)
 

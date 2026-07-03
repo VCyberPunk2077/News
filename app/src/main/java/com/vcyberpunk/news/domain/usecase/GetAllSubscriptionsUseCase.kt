@@ -7,6 +7,6 @@ class GetAllSubscriptionsUseCase @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
 
-    operator fun invoke() = newsRepository.gelAllSubscriptions()
+    operator fun invoke() = newsRepository.getAllSubscriptions()
 
 }

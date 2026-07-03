@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
 
-    fun gelAllSubscriptions(): Flow<List<String>>
+    fun getAllSubscriptions(): Flow<List<String>>
 
     suspend fun addSubscription(topic: String)
 

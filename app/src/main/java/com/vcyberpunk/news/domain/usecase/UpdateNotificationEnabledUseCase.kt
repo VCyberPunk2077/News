@@ -7,6 +7,6 @@ class UpdateNotificationEnabledUseCase @Inject constructor(
     private val repository: SettingsRepository
 ) {
 
-    suspend operator fun invoke(enabled: Boolean) = repository.updateNotificationsEnables(enabled)
+    suspend operator fun invoke(enabled: Boolean) = repository.updateNotificationsEnabled(enabled)
 
 }
